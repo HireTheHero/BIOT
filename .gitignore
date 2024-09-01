@@ -2,4 +2,4 @@ model/__pycache__/*
 __pycache__/*
 log/*
 log-pretrain/*
-datasets/*/config_test.ini
+**/config_test.ini
