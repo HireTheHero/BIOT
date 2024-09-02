@@ -140,7 +140,7 @@ def main():
     # process in parallel
     with mp.Pool(mp.cpu_count()) as pool:
         res = pool.starmap(
-            sub_to_segments, zip(folders, out_folders, root, channels, SAMPLING_RATE)
+            sub_to_segments, zip(folders, out_folders, [root]*len(folders), [channels]*len(folders), [SAMPLING_RATE]*len(folders))
         )
 
 

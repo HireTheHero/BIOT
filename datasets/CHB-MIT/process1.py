@@ -1,3 +1,4 @@
+import ast
 import os
 import argparse
 import configparser
@@ -250,14 +251,37 @@ def read_config(config_path):
     return config
 
 
-def main():
+def main(
+    parameters=[
+        ("01", "01", 2, 46, 0),
+        ("02", "01", 2, 35, 0),
+        ("03", "01", 2, 38, 0),
+        ("05", "01", 2, 39, 0),
+        ("06", "01", 2, 24, 0),
+        ("07", "01", 2, 19, 0),
+        ("08", "02", 3, 29, 0),
+        ("10", "01", 2, 89, 0),
+        ("11", "01", 2, 99, 0),
+        ("14", "01", 2, 42, 0),
+        ("20", "01", 2, 68, 0),
+        ("21", "01", 2, 33, 0),
+        ("22", "01", 2, 77, 0),
+        ("23", "06", 7, 20, 0),
+        ("24", "01", 3, 21, 0),
+        ("04", "07", 1, 43, 1),
+        ("09", "02", 1, 19, 1),
+        ("15", "02", 1, 63, 1),
+        ("16", "01", 2, 19, 0),
+        ("18", "02", 1, 36, 1),
+        ("19", "02", 1, 30, 1),
+    ]
+):
     args = parse_args()
     config = read_config(args.config)
     signals_path = config.get("Paths", "signals_path")
     clean_path = config.get("Paths", "clean_path")
     if not os.path.exists(clean_path):
         os.makedirs(clean_path)
-    parameters = eval(config.get("Parameters", "parameters"))
 
     parameters = [
         (p[0], p[1], p[2], p[3], p[4], signals_path, clean_path) for p in parameters
