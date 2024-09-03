@@ -124,7 +124,6 @@ def main():
     SAMPLING_RATE = config.getint("SAMPLING_RATE", "rate")
     if not os.path.exists(out):
         os.makedirs(out)
-    # ... (Code remains the same)
     folders = os.listdir(root)
     out_folders = []
     for folder in folders:
@@ -140,7 +139,14 @@ def main():
     # process in parallel
     with mp.Pool(mp.cpu_count()) as pool:
         res = pool.starmap(
-            sub_to_segments, zip(folders, out_folders, [root]*len(folders), [channels]*len(folders), [SAMPLING_RATE]*len(folders))
+            sub_to_segments,
+            zip(
+                folders,
+                out_folders,
+                [root] * len(folders),
+                [channels] * len(folders),
+                [SAMPLING_RATE] * len(folders),
+            ),
         )
 
 
